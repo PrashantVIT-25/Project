@@ -33,15 +33,21 @@ print(f"{'Degree 4':<15} | {r2_score(y_test, p4_pred)*100:<15.2f} | {mean_square
 
 # 6. Prediction Logic 
 print("\n--- Student Score Predictor ---")
+try:
+    h = float(input("Enter weekly study hours: "))
+    a = float(input("Enter attendance percentage: "))
+    b = float(input("Enter previous score: "))
+    t = float(input("Enter number of tutoring sessions: "))
 
-h = float(input("Enter weekly study hours: "))
-a = float(input("Enter attendance percentage: "))
-b = float(input("Enter previous score: "))
-t = float(input("Enter number of tutoring sessions: "))
+    # Passing data as -> DataFrame -> names consistent
+    user_input = pd.DataFrame([[h, a, b, t]], columns = features)
+    user_input_p4 = poly_4.transform(user_input)
+    pred_quad = model_4.predict(user_input_p4) # using quadratic
+    
+    print(f"{'Degree 4':<15} | {np.clip(pred_quad[0], 0, 100):>14.2f}")
+    
+except ValueError:
+    print("Please enter valid numerical values.")
 
-# Passing data as -> DataFrame -> names consistent
-user_input = pd.DataFrame([[h, a, b, t]], columns = features)
-user_input_p4 = poly_4.transform(user_input)
-pred_quad = model_4.predict(user_input_p4) # using quadratic
-
-print(f"{'Degree 4':<15} | {np.clip(pred_quad[0], 0, 100):>14.2f}")
+# 7. Visualizing
+plt.figure(figsize=(10, 4))
