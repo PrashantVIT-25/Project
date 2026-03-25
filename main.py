@@ -71,3 +71,16 @@ plot_data = pd.DataFrame({
     'Previous_Scores': [avg_prev]*300,
     'Tutoring_Sessions': [avg_tutor]*300
 })
+
+# Plot for Quad Curve
+plt.plot(x_smooth, model_4.predict(poly_4.transform(plot_data)), 
+         color='blue', label='Quartic Curve (d=4)',
+         linewidth=2, linestyle='--')
+
+plt.title("Correlation Analysis: Study Impact on Academic Performance", fontweight='bold')
+plt.xlabel("Weekly Study Hours")
+plt.ylabel("Exam Score")
+plt.legend()
+plt.grid(True, linestyle=':', alpha=0.6)
+plt.savefig("Correlation_Graph.png", dpi=300)
+plt.show()
