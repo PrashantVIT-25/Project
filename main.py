@@ -26,7 +26,7 @@ X_test_p4 = poly_4.transform(X_test)
 model_4 = LinearRegression().fit(X_train_p4, y_train)
 p4_pred = model_4.predict(X_test_p4)
 
-#5. Comparison Table btw Models
+#5. Model Accuracy
 print(f"{'Model Type':<15} | {'R² Score (%)':<15} | {'MSE':<10}")
 print("-" * 45)
 print(f"{'Degree 4':<15} | {r2_score(y_test, p4_pred)*100:<15.2f} | {mean_squared_error(y_test, p4_pred):<10.2f}")
@@ -51,3 +51,8 @@ except ValueError:
 
 # 7. Visualizing
 plt.figure(figsize=(10, 4))
+
+# scatter for the dots
+plt.scatter(df['Hours_Studied'],
+            df['Exam_Score'], color='orange', alpha=0.2, 
+            label='Actual Data', s=10)
