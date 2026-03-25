@@ -52,7 +52,22 @@ except ValueError:
 # 7. Visualizing
 plt.figure(figsize=(10, 4))
 
-# scatter for the dots
+# 8. Plotting
+
+# Scatter for the dots
 plt.scatter(df['Hours_Studied'],
             df['Exam_Score'], color='orange', alpha=0.2, 
             label='Actual Data', s=10)
+
+# Data Variables
+x_smooth = np.linspace(df['Hours_Studied'].min(), df['Hours_Studied'].max(), 300)
+avg_attendance = df['Attendance'].mean()
+avg_prev = df['Previous_Scores'].mean()
+avg_tutor = df['Tutoring_Sessions'].mean()
+
+plot_data = pd.DataFrame({
+    'Hours_Studied': x_smooth,
+    'Attendance': [avg_attendance]*300,
+    'Previous_Scores': [avg_prev]*300,
+    'Tutoring_Sessions': [avg_tutor]*300
+})
